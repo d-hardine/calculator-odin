@@ -1,17 +1,17 @@
 function add(a,b) {
-    return a + b;
+    return Math.round((a + b) * 1000000)/ 1000000;
 }
 
 function substract(a,b) {
-    return a - b;
+    return Math.round((a - b) * 1000000)/ 1000000;
 }
 
 function division(a,b) {
-    return a/b;
+    return Math.round((a / b) * 1000000)/ 1000000;
 }
 
 function multiply(a,b) {
-    return a*b;
+    return Math.round((a * b) * 1000000)/ 1000000;
 }
 
 let firstNum = 0;
@@ -22,22 +22,22 @@ function operate(firstNum,operator,secondNum) {
     if (operator === '+') {
         let results = add(firstNum,secondNum);
         display.textContent = results;
-        return results;
+        return parseFloat(results);
     }
     else if (operator === '-') {
         let results = substract(firstNum,secondNum);
         display.textContent = results;
-        return results;
+        return parseFloat(results);
     }
     else if (operator === '/') {
         let results = division(firstNum,secondNum);
         display.textContent = results;
-        return results;
+        return parseFloat(results);
     }
     else if (operator === 'x') {
         let results = multiply(firstNum,secondNum);
         display.textContent = results;
-        return results;
+        return parseFloat(results);
     }
 }
 
@@ -45,12 +45,23 @@ const display = document.querySelector('.display');
 const numberButton = document.querySelectorAll('.number-button');
 const operateButton = document.querySelectorAll('.operation-button');
 
-function NumToDisplay() {
+const decimal = document.querySelector('.decimal');
+
+decimal.addEventListener('click', function() {
+    if(numberButton['10'].textContent.includes('.') == true) {
+        numberButton['10'].disabled = true;
+    }
+    else if(numberButton['10'].textContent.includes('.')) {
+        numberButton['10'].disabled = false;
+    }
+});
+
+function NumToDisplay() {   
     for (let i=0;i<=(numberButton.length - 1);i++) {
         numberButton[i].addEventListener('click',function () {
             if (operator == '') {
                 if (display.textContent.length != 14) {
-                    if (display.textContent == 0) {
+                    if (firstNum == 0) {
                         return firstNum = Number(display.textContent = numberButton[i].textContent);
                     }
                     else {
@@ -60,7 +71,7 @@ function NumToDisplay() {
             }
             else {
                 if (display.textContent.length != 14) {
-                    if (display.textContent == 0) {
+                    if (secondNum == 0) {
                         return secondNum = Number(display.textContent = numberButton[i].textContent);
                     }
                     else {
@@ -75,9 +86,20 @@ function NumToDisplay() {
 function operatorClicked() {
     for (let i=0;i<=(operateButton.length-1);i++) {
         operateButton[i].addEventListener('click',function() {
-            if (operateButton[i].textContent != '=') {
-                display.textContent = 0;
-                return operator = operateButton[i].textContent;
+            if (operator == '') {
+                if (operateButton[i].textContent != '=' && operateButton[i].textContent != 'c') {
+                    numberButton['10'].disabled = false;
+                    return operator = operateButton[i].textContent;
+                }
+            }
+            else {
+                console.log(firstNum,operator,secondNum);
+                results = operate(firstNum,operator,secondNum);
+                operator = operateButton[i].textContent;
+                console.log(results);
+                firstNum = results;
+                secondNum = 0;
+                numberButton['10'].disabled = false;
             }
         })
     }
@@ -85,7 +107,23 @@ function operatorClicked() {
 
 const equal = document.querySelector('.equal');
 equal.addEventListener('click', function() {
-    operate(firstNum,operator,secondNum);
+    if (operator == '') {
+        operator = '+';
+    }
+    results = operate(firstNum,operator,secondNum);
+    firstNum = results;
+    operator = '';
+    secondNum = 0;
+    numberButton['10'].disabled = false;
+});
+
+const clear = document.querySelector('.clear');
+clear.addEventListener('click',function () {
+    firstNum = 0;
+    operator = '';
+    secondNum = 0;
+    display.textContent = '0';
+    numberButton['10'].disabled = false;
 });
 
 NumToDisplay();

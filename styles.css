@@ -57,3 +57,15 @@ button {
     margin-bottom: 12px;
     border-radius: 10px;
 }
+
+.equal {
+    height: 105px;
+}
+
+.clear{
+    height: 105px;
+}
+
+.zero {
+    width: 85px;
+}
