@@ -7,7 +7,13 @@ function substract(a,b) {
 }
 
 function division(a,b) {
-    return Math.round((a / b) * 1000000)/ 1000000;
+    if (b == 0) {
+        return 'AAARRGGHH'
+    }
+    else {
+        return Math.round((a / b) * 1000000)/ 1000000;
+    }
+    
 }
 
 function multiply(a,b) {
@@ -60,27 +66,24 @@ function NumToDisplay() {
     for (let i=0;i<=(numberButton.length - 1);i++) {
         numberButton[i].addEventListener('click',function () {
             if (operator == '') {
-                if (display.textContent.length != 14) {
-                    if (firstNum == 0) {
-                        return firstNum = Number(display.textContent = numberButton[i].textContent);
-                    }
-                    else {
-                        return firstNum = Number(display.textContent = display.textContent + numberButton[i].textContent);
-                    }
+                if (firstNum == 0) {
+                    firstNum = Number(display.textContent = numberButton[i].textContent);
+                    console.log(display.textContent.length);
+                }
+                else {
+                    return firstNum = Number(display.textContent = display.textContent + numberButton[i].textContent);
                 }
             }
             else {
-                if (display.textContent.length != 14) {
-                    if (secondNum == 0) {
-                        return secondNum = Number(display.textContent = numberButton[i].textContent);
-                    }
-                    else {
-                        return secondNum = Number(display.textContent = display.textContent + numberButton[i].textContent);
-                    }
+                if (secondNum == 0) {
+                    return secondNum = Number(display.textContent = numberButton[i].textContent);
+                }
+                else {
+                    return secondNum = Number(display.textContent = display.textContent + numberButton[i].textContent);
                 }
             }
-        });
-    }
+        }
+    )}
 }
 
 function operatorClicked() {
