@@ -1,9 +1,9 @@
 function add(a,b) {
-    return Math.round((a + b) * 1000000)/ 1000000;
+    return Math.round((a + b) * 1000)/ 1000;
 }
 
 function substract(a,b) {
-    return Math.round((a - b) * 1000000)/ 1000000;
+    return Math.round((a - b) * 1000)/ 1000;
 }
 
 function division(a,b) {
@@ -11,13 +11,13 @@ function division(a,b) {
         return 'AAARRGGHH'
     }
     else {
-        return Math.round((a / b) * 1000000)/ 1000000;
+        return Math.round((a / b) * 1000)/ 1000;
     }
     
 }
 
 function multiply(a,b) {
-    return Math.round((a * b) * 1000000)/ 1000000;
+    return Math.round((a * b) * 1000)/ 1000;
 }
 
 let firstNum = 0;
@@ -66,20 +66,23 @@ function NumToDisplay() {
     for (let i=0;i<=(numberButton.length - 1);i++) {
         numberButton[i].addEventListener('click',function () {
             if (operator == '') {
-                if (firstNum == 0) {
-                    firstNum = Number(display.textContent = numberButton[i].textContent);
-                    console.log(display.textContent.length);
-                }
-                else {
-                    return firstNum = Number(display.textContent = display.textContent + numberButton[i].textContent);
+                if (display.textContent.length <= 12) {
+                    if (firstNum == 0) {
+                        firstNum = Number(display.textContent = numberButton[i].textContent);
+                    }
+                    else {
+                        return firstNum = Number(display.textContent = display.textContent + numberButton[i].textContent);
+                    }
                 }
             }
             else {
-                if (secondNum == 0) {
-                    return secondNum = Number(display.textContent = numberButton[i].textContent);
-                }
-                else {
-                    return secondNum = Number(display.textContent = display.textContent + numberButton[i].textContent);
+                if (display.textContent.length <= 13) {
+                    if (secondNum == 0) {
+                        return secondNum = Number(display.textContent = numberButton[i].textContent);
+                    }
+                    else {
+                        return secondNum = Number(display.textContent = display.textContent + numberButton[i].textContent);
+                    }
                 }
             }
         }
