@@ -120,7 +120,6 @@ equal.addEventListener('click', function() {
     firstNum = results;
     operator = '';
     secondNum = 0;
-    numberButton['10'].disabled = false;
 });
 
 const clear = document.querySelector('.clear');
