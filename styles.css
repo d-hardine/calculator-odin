@@ -28,6 +28,8 @@ body {
     border-radius: 15px;
     padding-top: 2rem;
     padding-right: 5px;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .button-container {
